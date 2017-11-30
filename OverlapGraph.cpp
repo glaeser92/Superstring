@@ -35,19 +35,32 @@ void OverlapGraph::calcOverlaps() {
 				matrix[i][j] = 0;
 			else {
 				//calc overlap of string i with string j
-				double overlap = 0;
-				int k = strings[i].length() - 1;
-				int l = 0;
-				while (k > 0 && l < strings[j].length()) {
-					if (strings[i][k] == strings[j][l])
-						overlap++;
-					k--;
-					l++;
+				double maxOverlap = 0;
+				for (int k = strings[i].length() - 1; k >= 0; k--)
+				{
+					if (stringBeginsWith(strings[i].substr(k), strings[j]))
+					{
+						if ((strings[i].length() - k) > maxOverlap) {
+							maxOverlap = strings[i].length() - k;
+						}
+					}
 				}
-				matrix[i][j] = overlap;
+				matrix[i][j] = maxOverlap;
 			}
 		}
 	}
+}
+
+bool OverlapGraph::stringBeginsWith(string &a, string &b) {
+	if (a.length() > b.length()) {
+		return false;
+	}
+	for (int i = 0; i < a.length(); i++) {
+		if (a[i] != b[i]) {
+			return false;
+		}
+	}
+	return true;
 }
 
 

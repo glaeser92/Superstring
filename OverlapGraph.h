@@ -18,6 +18,7 @@ private:
 	int n;
 	vector<string> strings;
 	vector<vector<double>> matrix;
+	bool stringBeginsWith(string &a, string &b);
 
 	void calcOverlaps();
 };

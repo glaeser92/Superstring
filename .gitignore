@@ -1,0 +1,10 @@
+
+Debug/Superstring\.tlog/
+
+Debug/
+
+*.vcxproj
+
+*.filters
+
+*.user

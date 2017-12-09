@@ -38,7 +38,8 @@ void OverlapGraph::calcOverlaps() {
 				double maxOverlap = 0;
 				for (int k = strings[i].length() - 1; k >= 0; k--)
 				{
-					if (stringBeginsWith(strings[i].substr(k), strings[j]))
+					string str = strings[i].substr(k);
+					if (stringBeginsWith(str, strings[j]))
 					{
 						if ((strings[i].length() - k) > maxOverlap) {
 							maxOverlap = strings[i].length() - k;

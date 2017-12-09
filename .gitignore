@@ -8,3 +8,5 @@ Debug/
 *.filters
 
 *.user
+/BipGraph.cpp
+/BipGraph.h

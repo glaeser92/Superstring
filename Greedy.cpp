@@ -39,6 +39,10 @@ void Greedy::calcSuperstring() {
 	while (strings.size() > 1) {
 		calcOverlaps();
 
+		//print edges
+		printEdges();
+		cout << endl;
+
 		// merge strings
 		int maxWeight = 0;
 		int maxIndex = 0;
@@ -56,16 +60,27 @@ void Greedy::calcSuperstring() {
 			sourceString.substr(sourceString.length() - overlap, overlap) +
 			destString.substr(overlap, destString.length() - overlap);
 
-		strings.erase(strings.begin() + edges[maxIndex].src);
-		strings.erase(strings.begin() + edges[maxIndex].dest);
+		for (auto it = strings.begin(); it != strings.end(); ) {
+			if ((*it).compare(sourceString) == 0 || (*it).compare(destString) == 0) {
+				it = strings.erase(it);
+			}
+			else {
+				++it;
+			}
+		}
 
 		strings.push_back(newString);
-
 		edges.clear();
+
+		//print strings
+		for (auto & str : strings) {
+			cout << str << " ";
+		}
+		cout << endl;
+		cout << endl;
 	}
 
 	cout << strings[0] << endl;
-
 }
 
 bool Greedy::stringBeginsWith(string &a, string &b) {

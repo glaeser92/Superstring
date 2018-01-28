@@ -50,7 +50,7 @@ void UndirectedGraph::markPath(int* match, int* base, bool* blossom, int* p, int
 		//set predecessor
 		p[v] = children;
 		children = match[v];
-		//
+		//consider predecessor of matching node
 		v = p[match[v]];
 	}
 }
@@ -82,18 +82,23 @@ int UndirectedGraph::findPath(int* match, int* p, int root)
 		int v = q[qh++];
 		for (int& to : adj[v])
 		{
-			//if v and to are in the same blossom or
+			//if v and to are in the same blossom or previous matching edge considered
 			if (base[v] == base[to] || match[v] == to)
 				continue;
 			//if blossom detected
+			//if we arrive at the starting node or at a matching edge from the same tree
 			if (to == root || match[to] != -1 &&  p[match[to]] != -1)
 			{
 				//find blossom base
 				int curbase = lca(match, base, p, v, to);
-				//
+
 				bool* blossom = new bool[V];
+				for (int i = 0; i < V; i++)
+					blossom[i] = false;
+				//mark blossom nodes
 				markPath(match, base, blossom, p, v, curbase, to);
 				markPath(match, base, blossom, p, to, curbase, v);
+
 				for (int i = 0; i < V; i++)
 					//if i is in blossom
 					if (blossom[base[i]])

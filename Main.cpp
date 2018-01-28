@@ -7,14 +7,14 @@ int main() {
 
 	vector<string> strings = { "babaa", "baaba", "aabab", "babba" };
 
-	UndirectedGraph g(6);
-	g.addEdge(0, 1);
-	g.addEdge(1, 2);
-	g.addEdge(1, 3);
-	g.addEdge(3, 4);
+	UndirectedGraph g(7);
+	g.addEdge(3, 6);
+	g.addEdge(3, 1);
+	g.addEdge(1, 4);
 	g.addEdge(4, 5);
-	g.addEdge(5, 3);
 	g.addEdge(5, 2);
+	g.addEdge(2, 0);
+	g.addEdge(1, 0);
 
 	cout << g.maxMatching() << endl;
 
